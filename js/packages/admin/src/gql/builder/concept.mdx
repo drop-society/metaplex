@@ -1,0 +1,25 @@
+---
+name: Graphql Generation
+menu: Graphql
+---
+
+```
+// Fetch your schema however you wish, from a local file or directly from the source
+const schema = await loadSchema("http://bdgt.dev.bloomberg.com/graphql", {
+  loaders: [new UrlLoader()],
+});
+
+// Instantiate the generator class
+const generator = new GraphQLQueryGenerator(schema);
+
+// Build the query of interest
+generator.buildQuery("catalogItem", {
+  depthLimit: 5,
+  recursiveTypeLimit: 2,
+  expandInterfaces: false,
+  introspectTypeNames: true,
+});
+
+// And get your query and variable bindings!
+const { query, variables } = generator.getQuery();
+```

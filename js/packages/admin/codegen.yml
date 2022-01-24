@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://localhost:8080/query"
+documents: "src/gql/**/*.ts"
+generates:
+  src/gql/generated/generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  src/gql/generated/graphql.schema.json:
+    plugins:
+      - "introspection"

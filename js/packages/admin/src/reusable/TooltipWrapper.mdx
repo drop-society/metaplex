@@ -1,0 +1,47 @@
+---
+name: TooltipWrapper
+menu: Components
+---
+
+import { Playground, Props, Description } from "documentation";
+import TooltipWrapper from "reusable/TooltipWrapper";
+import Tooltip from "@mui/material/Tooltip";
+import { Button } from "@mui/material";
+
+# TooltipWrapper
+
+<Description of={TooltipWrapper} />
+
+## Core material UI Tooltip vs TooltipWrapper
+
+Core material UI Tooltip will not open, hover over and see for yourself.
+
+<Playground>
+  <Tooltip title={"Tooltip when button is disabled"}>
+    <Button disabled={true} variant={"outlined"}>
+      A Disabled button using material-core Tooltip
+    </Button>
+  </Tooltip>
+  <p />
+  <TooltipWrapper title={"Tooltip when button is disabled"}>
+    <Button disabled={true} variant={"outlined"}>
+      A Disabled button using TooltipWrapper
+    </Button>
+  </TooltipWrapper>
+</Playground>
+
+## Disable Tooltip
+
+we can simply disable Tooltip when not needed such as when a button is enabled
+
+<Playground>
+  <TooltipWrapper title={"Tooltip when button is disabled"} disabled={true}>
+    <Button disabled={false} variant={"outlined"}>
+      This button don't show Tooltip
+    </Button>
+  </TooltipWrapper>
+</Playground>
+
+## properties
+
+<Props of={TooltipWrapper} />

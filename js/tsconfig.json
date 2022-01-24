@@ -9,6 +9,7 @@
       "es2017",
       "dom"
     ],
+    "sourceRoot": "./",
     "strict": true,
     "sourceMap": true,
     "declaration": true,

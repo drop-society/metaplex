@@ -66,7 +66,7 @@ export const MEMO_ID = new PublicKey(
 );
 
 export const METADATA_PROGRAM_ID =
-  'metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s' as StringPublicKey;
+  'BaajPBt5H7dMwwFwg3Z23KGJE8vnDWTW2ZbX6N8FhWz9' as StringPublicKey;
 
 export const VAULT_ID =
   'vau1zxA2LbssAUEF7Gpw91zMM1LvXrvpzJtmZ58rPsn' as StringPublicKey;
