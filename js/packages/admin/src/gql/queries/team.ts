@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const CREATE_TEAM = gql`
   mutation CreateTeam(
@@ -22,6 +22,39 @@ export const CREATE_TEAM = gql`
       ... on CreateTeamError {
         message
         success
+      }
+    }
+  }
+`;
+
+export const GET_TEAM = gql`
+  query GetTeam{
+    team: {
+      id
+      name
+      description
+      identifier
+      workspaces {
+        id
+        name
+        description
+        externalID
+        teamID
+      }
+
+      members {
+        firstName
+        lastName
+        email
+        displayName
+        role
+        teams
+      }
+
+      company {
+        name
+        description
+        identifier
       }
     }
   }

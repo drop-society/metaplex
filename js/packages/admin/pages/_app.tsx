@@ -1,16 +1,16 @@
-import * as React from 'react';
-import Head from 'next/head';
-import { AppProps } from 'next/app';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from 'src/components/theme';
-import createEmotionCache from 'src/components/createEmotionCache';
-import QueryProvider from 'src/query/QueryProvider';
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { TOKEN } from 'src/gql/queries/users';
-import { ApolloProvider } from '@apollo/react-hooks';
 import { setContext } from '@apollo/client/link/context';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import * as React from 'react';
+import createEmotionCache from 'src/components/createEmotionCache';
+import theme from 'src/components/theme';
+import { TOKEN } from 'src/gql/queries/users';
+import QueryProvider from 'src/query/QueryProvider';
 
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -20,13 +20,12 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 const httpLink = createHttpLink({
-  uri: "/graphql/query"
+  uri: "/query"
 });
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem(TOKEN);
-  console.log(token)
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -48,6 +47,9 @@ export default function MyApp(props: MyAppProps) {
         }
       },
       Mutation: {
+        logOut() {
+          return localStorage.removeItem(TOKEN)
+        },
         setToken(_, { token }) {
           localStorage.setItem(TOKEN, token);
         }

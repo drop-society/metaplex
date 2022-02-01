@@ -111,8 +111,8 @@ export default function Layout({children}: React.PropsWithChildren<{}>) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <LoginButton/>
         </Toolbar>
-        <LoginButton/>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <Toolbar

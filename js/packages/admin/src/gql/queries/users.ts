@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
-import { gql as gqlc } from "graphql-tag";
+import { gql } from '@apollo/client';
+import { gql as gqlc } from 'graphql-tag';
 
-export const TOKEN = "token";
+export const TOKEN = 'token';
 
 export const CREATE_USER = gql`
   mutation CreateUser(
@@ -34,9 +34,9 @@ export const CREATE_USER = gql`
   }
 `;
 
-export const LOGIN_USER = gql`
-  mutation loginUser($email: String!, $password: String!) {
-    loginUser(input: { email: $email, password: $password }) {
+export const LOGIN_ADMIN_USER = gql`
+  mutation loginAdminUser($email: String!, $password: String!) {
+    loginAdminUser(input: { email: $email, password: $password }) {
       ... on LoginUserSuccess {
         success
         token
@@ -49,9 +49,9 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const GET_USER = gql`
-  query GetUser {
-    getUser {
+export const GET_ADMIN_USER = gql`
+  query GetAdminUser {
+    getAdminUser {
       ... on GetUserSuccess {
         user {
           id
@@ -93,5 +93,11 @@ export const IS_LOGGED_IN = gqlc`
 export const SET_TOKEN = gqlc`
   mutation SetToken($token: String!) {
     setToken(token: $token) @client(always: true)
+  }
+`;
+
+export const LOG_OUT = gqlc`
+  mutation SetToken($token: String!) {
+    logOut @client(always: true)
   }
 `;
