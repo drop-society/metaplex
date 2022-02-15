@@ -104,20 +104,18 @@ export const DropSteps: Array<ProgressStep<
 
 
 
-
-
+export interface StepCompleted {
+  completed: boolean;
+  substepsCompleted: {
+    [index: number]: StepCompleted
+  }
+};
 
 export interface DropFormState<T> {
   steps: Array<ProgressStep<T>>
   stepsCompleted: {
-    [index: number]: {
-      completed: boolean;
-      substepsCompleted:  {
-        [index: number]: boolean;
-        completed: boolean;
-      }
-    }
-  }
+    [index: number]:  StepCompleted
+  };
   step: number;
   subStep: number;
 }
@@ -137,6 +135,29 @@ type ProgressSubStep<T>  = {
 export type ProgressStep<T> = {
   substeps: Array<ProgressSubStep<T>>
 } & Step;
+
+export const useCompleteStep = () => {
+  const {setFieldValue, values: {stepsCompleted}} = useForm<DropFormState<{}>>()
+
+  const setStepCompleted = (i: number, subi: number) => () => {
+    let {completed, ...newStepsCompleted} = { ...stepsCompleted[i] } as StepCompleted
+
+    if (subi !== undefined ) {
+      setFieldValue('subStep', subi)
+      setFieldValue('stepsCompleted', {
+        ...stepsCompleted, [i]: { 
+          ...newStepsCompleted, 
+          substepsCompleted: {
+            ...newStepsCompleted?.substepsCompleted, 
+            [subi]: {completed: true} 
+          }
+        }
+      })
+    }
+  }
+
+  return [stepsCompleted, setStepCompleted];
+}
 
 
 export const useGoToStep = () => {
